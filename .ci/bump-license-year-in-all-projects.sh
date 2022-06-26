@@ -15,11 +15,11 @@ git add . && git commit -m "minor: bump year to $CURR_YEAR" && git push origin m
 mkdir -p .ci-temp/bump-year
 cd .ci-temp/bump-year
 
-git clone git@github.com:Rahulkhinchi03/contribution.git
-git clone git@github.com:Rahulkhinchi03/sonar-checkstyle.git
-git clone git@github.com:Rahulkhinchi03/regression-tool.git
-git clone git@github.com:Rahulkhinchi03/sevntu.checkstyle.git
-git clone git@github.com:Rahulkhinchi03/methods-distance.git
+git clone https://github.com/Rahulkhinchi03/checkstyle.git
+git clone https://github.com/Rahulkhinchi03/sonar-checkstyle.git
+git clone https://github.com/Rahulkhinchi03/regression-tool.git
+git clone https://github.com/Rahulkhinchi03/sevntu.checkstyle.git
+git clone https://github.com/Rahulkhinchi03/methods-distance.git
 
 ./../../.ci/bump-license-year.sh "$PREV_YEAR" "$CURR_YEAR" contribution
 ./../../.ci/bump-license-year.sh "$PREV_YEAR" "$CURR_YEAR" sonar-checkstyle
