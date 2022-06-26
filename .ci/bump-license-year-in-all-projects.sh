@@ -3,7 +3,7 @@
 set -e
 
 CURR_YEAR=$(date +"%Y")
-JAVA_FILE=$(find ./src/main -type f -name *.java -print -quit)
+JAVA_FILE=$(find ./src/ -type f -name *.java -print -quit)
 echo "Current year will be taken from $JAVA_FILE"
 PREV_YEAR=$(grep "Copyright" "$JAVA_FILE" | cut -d " " -f 4 | cut -d '-' -f 2)
 echo "CURR_YEAR=$CURR_YEAR"
