@@ -18,7 +18,7 @@ jobs:
       - name: Checkout the latest code
         uses: actions/checkout@v2
         with:
-          token: ${{ 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 }}
+          token: $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 
       - name: Set Current Year
         id: CURRENT_YEAR
         run: |
@@ -27,7 +27,7 @@ jobs:
         run: |
           ./.ci/bump-license-year-in-all-projects.sh $(expr ${{ env.YEAR }} - 1) ${{ env.YEAR }} .
         env:
-          YEAR: ${{ 2023 }}
+          YEAR: $2023
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         env:
