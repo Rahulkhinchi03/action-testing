@@ -2,9 +2,6 @@
 
 set -e
 
-git config --global user.email "rahulkhinchirk7@gmail.com"
-git config --global user.name "Rahulkhinchi03"
-
 CURR_YEAR=$(date +"%Y")
 JAVA_FILE=$(find ./src/ -type f -name *.java -print -quit)
 echo "Current year will be taken from $JAVA_FILE"

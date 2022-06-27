@@ -6,7 +6,6 @@
 #############################################################################
 name: "Bump license year in all project"
 on:
-  workflow_dispatch:
 permissions:
   contents: write
   pull-requests: write
@@ -28,6 +27,19 @@ jobs:
           ./.ci/bump-license-year-in-all-projects.sh $(expr ${{ env.YEAR }} - 1) ${{ env.YEAR }} .
         env:
           YEAR: ${{ steps.CURRENT_YEAR.outputs.year }}
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          repository: Rahulkhinchi03/action-testing-2
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Update config
+        run: |
+          git config --local user.email "$GITHUB_EMAIL"
+          git config --local user.name "$GITHUB_USERNAME"
+        env:
+          GITHUB_USERNAME: Rahulkhinchi03
+          GITHUB_EMAIL: rahulkhinchirk7@gmail.com
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         env:
