@@ -18,7 +18,7 @@ jobs:
       - name: Checkout the latest code
         uses: actions/checkout@v2
         with:
-          token: $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 
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Set Current Year
         id: CURRENT_YEAR
         run: |
@@ -27,11 +27,11 @@ jobs:
         run: |
           ./.ci/bump-license-year-in-all-projects.sh $(expr ${{ env.YEAR }} - 1) ${{ env.YEAR }} .
         env:
-          YEAR: $2023
+          YEAR: ${{ steps.CURRENT_YEAR.outputs.year }}
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         env:
-          YEAR: ${{ 2023 }}
+          YEAR: ${{ steps.CURRENT_YEAR.outputs.year }}
         with:
           commit-message: "minor: Bump year in all projects to ${{ env.YEAR }}"
           committer: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
@@ -40,4 +40,4 @@ jobs:
           delete-branch: true
           body: "minor: Bump year in all projects to ${{ env.YEAR }}"
           title: "minor: Bump year in all projects to ${{ env.YEAR }}"
-          token: $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
+          token: ${{ secrets.GITHUB_TOKEN }}
