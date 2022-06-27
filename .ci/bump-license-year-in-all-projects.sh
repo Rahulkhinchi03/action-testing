@@ -2,15 +2,15 @@
 
 set -e
 
+git config --global user.email "rahulkhinchirk7@gmail.com"
+git config --global user.name "Rahulkhinchi03"
+
 CURR_YEAR=$(date +"%Y")
 JAVA_FILE=$(find ./src/ -type f -name *.java -print -quit)
 echo "Current year will be taken from $JAVA_FILE"
 PREV_YEAR=$(grep "Copyright" "$JAVA_FILE" | cut -d " " -f 4 | cut -d '-' -f 2)
 echo "CURR_YEAR=$CURR_YEAR"
 echo "PREV_YEAR=$PREV_YEAR"
-
-git config user.email "rahulkhinchirk7@gmail.com"
-git config user.name "Rahulkhinchi03"
 
 ./.ci/bump-license-year.sh "$PREV_YEAR" "$CURR_YEAR" .
 git add . && git commit -m "minor: bump year to $CURR_YEAR" && git push origin main
