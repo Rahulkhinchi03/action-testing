@@ -1,0 +1,36 @@
+#############################################################################
+# GitHub Action to bump license year
+#
+# Workflow starts every new year.
+#
+#############################################################################
+name: "Bump license year"
+on:
+  schedule:
+    - cron: '15 17 12 7 *'
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  bump:
+    name: Bump license year
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set Current Year
+        id: CURRENT_YEAR
+        run: |
+          echo "::set-output name=year::$(date +'%Y')"
+      - name: Modify File
+        run: |
+          ./.ci/bump-license-year.sh $(expr ${{ env.YEAR }} - 1) ${{ env.YEAR }} .
+        env:
+          YEAR: ${{ steps.CURRENT_YEAR.outputs.year }}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: bump-year
