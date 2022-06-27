@@ -10,7 +10,7 @@ echo "CURR_YEAR=$CURR_YEAR"
 echo "PREV_YEAR=$PREV_YEAR"
 
 ./.ci/bump-license-year.sh "$PREV_YEAR" "$CURR_YEAR" .
-git add . && git commit -m "minor: bump year to $CURR_YEAR" && git push origin master
+git add . && git commit -m "minor: bump year to $CURR_YEAR" && git push origin main
 
 mkdir -p .ci-temp/bump-year
 cd .ci-temp/bump-year
@@ -20,5 +20,5 @@ git clone git@github.com:Rahulkhinchi03/action-testing-2.git
 ./../../.ci/bump-license-year.sh "$PREV_YEAR" "$CURR_YEAR" action-testing-2
 
 cd action-testing-2
-git add . && git commit -m "minor: bump year to $CURR_YEAR" && git push origin master
+git add . && git commit -m "minor: bump year to $CURR_YEAR" && git push origin main
 cd ../
