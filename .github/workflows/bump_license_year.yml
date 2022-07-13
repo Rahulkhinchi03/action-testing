@@ -28,9 +28,12 @@ jobs:
         run: |
           ./.ci/bump-license-year.sh $(expr ${{ env.YEAR }} - 1) ${{ env.YEAR }} .
         env:
-          YEAR: ${{ steps.CURRENT_YEAR.outputs.year }}
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: bump-year
+          YEAR: ${{ steps.CURRENT_YEAR.outputs.year }}          
+      - name: Push commit
+        uses: actions/checkout@v2
+      - name: Commit Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -am "minor: Bump year to ${{ env.YEAR }}"
+          git push
