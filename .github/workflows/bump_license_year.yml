@@ -7,7 +7,7 @@
 name: "Bump license year"
 on:
   schedule:
-    - cron: '15 5 13 7 *'
+    - cron: '40 15 15 7 *'
 permissions:
   contents: write
   pull-requests: write
@@ -24,14 +24,14 @@ jobs:
         id: CURRENT_YEAR
         run: |
           echo "::set-output name=year::$(date +'%Y')"
-      - name: Modify File
+      - name: Modify Files
         run: |
           ./.ci/bump-license-year.sh $(expr ${{ env.YEAR }} - 1) ${{ env.YEAR }} .
         env:
-          YEAR: ${{ steps.CURRENT_YEAR.outputs.year }}          
+          YEAR: ${{ steps.CURRENT_YEAR.outputs.year }}
       - name: Push commit
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git commit -am "minor: Bump year to ${{ env.YEAR }}"
-          git push
+          git show
